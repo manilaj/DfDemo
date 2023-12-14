@@ -14,6 +14,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTable1",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				}
 			],
@@ -73,8 +77,24 @@
 				"aggregate1 alterRow(upsertIf(true())) ~> alterRow1",
 				"alterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['PrimaryGenre','year'],",
+				"     format: 'table',",
+				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PrimaryGenre,",
+				"          year,",
+				"          AverageRating,",
+				"          HighestRead,",
+				"          LowestRead,",
+				"          NumberOfMovies",
+				"     )) ~> sink1"
 			]
 		}
 	}
