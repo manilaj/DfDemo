@@ -1,0 +1,9 @@
+{
+	"name": "mjain-data-factory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "68f8659a-a5fb-4119-9a4b-14cbccd54d04",
+		"tenantId": "b33974a6-33de-4229-b58f-a70751911079"
+	}
+}
