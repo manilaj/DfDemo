@@ -12,7 +12,11 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "select1"
@@ -66,7 +70,11 @@
 				"          HighestRead = first(title),",
 				"          LowestRead = last(title),",
 				"          NumberOfMovies = count()) ~> aggregate1",
-				"aggregate1 alterRow(upsertIf(true())) ~> alterRow1"
+				"aggregate1 alterRow(upsertIf(true())) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
